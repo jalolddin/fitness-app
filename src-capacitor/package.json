@@ -1,0 +1,13 @@
+{
+  "name": "ddx-fitness",
+  "version": "0.0.1",
+  "description": "A fitness app for DDX-Fitness",
+  "author": "Jaloliddin Ibrokhimov <75521507+jalolddin@users.noreply.github.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}
