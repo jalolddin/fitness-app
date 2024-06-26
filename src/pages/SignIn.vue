@@ -51,8 +51,10 @@ const send = () => {
     phone: phone.value,
   })
     .then((result) => {
-      showMessage("Смс отправлен указанному номеру", "positive");
-      isCodeSend.value = true;
+      if (result) {
+        showMessage("Смс отправлен указанному номеру", "positive");
+        isCodeSend.value = true;
+      }
     })
     .catch((error) => {
       if (error) {

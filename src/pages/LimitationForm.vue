@@ -81,7 +81,7 @@ const saveInfo = () => {
   })
     .then((result) => {
       showMessage("Данные успешно сохранены", "positive");
-      router.push("/before-result");
+      router.push("/main");
     })
     .catch((error) => {
       if (error) {

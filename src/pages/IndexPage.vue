@@ -11,7 +11,7 @@
       <div
         v-for="block in blocks"
         :key="block"
-        class="bg-block p-2 rounded w-5/12 h-28 flex flex-col items-center justify-center"
+        class="bg-block p-2 rounded w-[47%] h-28 flex flex-col items-center justify-center"
         @click="pushRoute(block.routeName)"
       >
         <p class="w-11/12 text-bold text-center text-lg">
@@ -57,14 +57,14 @@ const blocks = ref([
     routeName: "trainers",
   },
 ]);
+
 const getMe = () => {
-  try {
-    const data = UserAPI.getMe();
-    if (data) {
-      first_name.value = data.first_name;
-      last_name.value = data.last_name;
-    }
-  } catch (error) {}
+  UserAPI.getMe()
+    .then((result) => {
+      first_name.value = result.first_name;
+      last_name.value = result.last_name;
+    })
+    .catch((error) => {});
 };
 getMe();
 </script>

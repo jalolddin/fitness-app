@@ -1,7 +1,7 @@
 {
   "appId": "ddx.fitness.app",
-  "appName": "DDX-fitness",
-  "webDir": "ddx.fitness",
+  "appName": "DDX-Fitness",
+  "webDir": "public",
   "plugins": {
     "CapacitorHttp": {
       "enabled": true

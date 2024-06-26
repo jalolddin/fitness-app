@@ -1,16 +1,16 @@
 <template>
-  <div class="p-12 pt-12">
+  <div class="p-6 pt-12">
     <h1 class="p-6 pt-8 text-center pb-10 text-3xl font-bold">Профиль</h1>
     <div class="diet flex flex-col gap-8 justify-center items-center">
-      <div class="flex w-full justify-between gap-12">
+      <div class="flex w-full justify-between">
         <div
-          class="flex flex-col items-center justify-center bg-block rounded p-6 w-5/12"
+          class="flex flex-col items-center justify-center bg-block rounded p-6 w-[47%]"
         >
           <p class="text-xl text-bold">86 кг</p>
           <span>вес</span>
         </div>
         <div
-          class="flex flex-col items-center justify-center bg-block rounded p-6 w-5/12"
+          class="flex flex-col items-center justify-center bg-block rounded p-6 w-[49%]"
         >
           <p class="text-xl text-bold">185 см</p>
           <span>рост</span>
@@ -39,7 +39,12 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="gender" class="font-semibold">Пол</label>
-          <select v-model="userData.gender" required class="input w-full">
+          <select
+            :readonly="!editMode"
+            v-model="userData.gender"
+            required
+            class="input w-full"
+          >
             <option value="male" selected>Мужской</option>
             <option value="female">Женский</option>
           </select>
@@ -115,21 +120,29 @@ const blocks = ref([
 ]);
 
 const userData = ref();
-const saveInfo = () => {
-  try {
-    const data = UserAPI.editUserData({ ...userData.value });
-    showMessage("Данные успешно обновлены", "positive");
-    editMode.value = false;
-    getMe();
-  } catch (error) {}
-};
+
 const getMe = () => {
-  try {
-    const data = UserAPI.getMe();
-    userData.value = data;
-  } catch (error) {}
+  UserAPI.getMe()
+    .then((result) => {
+      userData.value = result;
+    })
+    .catch((error) => {});
 };
 getMe();
+
+const saveInfo = () => {
+  UserAPI.editUserData({
+    ...userData.value,
+  })
+    .then((result) => {
+      if (result) {
+        showMessage("Данные успешно обновлены", "positive");
+        editMode.value = false;
+        getMe();
+      }
+    })
+    .catch((error) => {});
+};
 </script>
 
 <style lang="scss">

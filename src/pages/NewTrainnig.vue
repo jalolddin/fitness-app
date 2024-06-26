@@ -1,5 +1,5 @@
 <template>
-  <div class="p-12 pt-12">
+  <div class="p-6 pt-12">
     <h1 class="p-6 pt-8 text-center pb-10 text-3xl font-bold">
       Создать новую тренировку
     </h1>
@@ -70,14 +70,16 @@ const userData = ref({
   span: "",
 });
 const router = useRouter();
+
 const saveInfo = () => {
-  try {
-    const data = FitnessProgrammAPI.create({ ...userData.value });
-    if (data) {
-      router.push({ name: "TraningsPage" });
-    }
-    showMessage("Новая тренировка успешно создана", "positive");
-  } catch (error) {}
+  FitnessProgrammAPI.create({ ...userData.value })
+    .then((result) => {
+      if (result) {
+        showMessage("Новая тренировка успешно добавлена", "positive");
+        router.push({ name: "TraningsPage" });
+      }
+    })
+    .catch((error) => {});
 };
 </script>
 

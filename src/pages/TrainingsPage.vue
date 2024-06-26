@@ -61,10 +61,11 @@ const create = () => {
 };
 const trainings = ref();
 const getAll = () => {
-  try {
-    const data = FitnessProgrammAPI.getAll();
-    trainings.value = data;
-  } catch (error) {}
+  FitnessProgrammAPI.getAll()
+    .then((result) => {
+      trainings.value = result;
+    })
+    .catch((error) => {});
 };
 getAll();
 </script>

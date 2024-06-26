@@ -40,13 +40,13 @@ import { TrainersAPI } from "../api";
 
 const trainers = ref();
 const getAll = () => {
-  try {
-    const data = TrainersAPI.getAll();
-    if (data) {
-      trainers.value = data;
-    }
-  } catch (error) {}
+  TrainersAPI.getAll()
+    .then((result) => {
+      trainers.value = result;
+    })
+    .catch((error) => {});
 };
+
 onMounted(() => {
   getAll();
 });
